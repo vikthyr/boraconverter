@@ -1,12 +1,57 @@
 console.log("frontend carregado");
-<script src="./constants.js"></script>
+//<script src="./constants.js"></script>
+
+var conversionData = null;
+var fromCurrencySymbol = null;
+var toCurrencySymbol = null;
+
+$(document).ready(function(){
+  $('#from-currency-select').change(function(){
+    console.log('mudou from');
+    SetFromCurrencySymbol();
+    SetToCurrencySymbol();
+    
+    $.ajax({
+      url: `/api/currency/rates?base=${fromCurrencySymbol}`,
+      method: "GET",
+      success: function(data) {
+        SetConversionData(data);
+        console.log(fromCurrencySymbol);
+        console.log(toCurrencySymbol);
+        console.log(fromCurrencySymbol);
+        console.log(conversionData);
+      },
+      error: function(error) {
+        console.error("Currency rate error:", error);
+      }
+    });
+  });
+
+  $('#to-currency-select').change(function(){
+    console.log('mudou to');
+    console.log(conversionData);
+    SetToCurrencySymbol();
+  });
+});
+
+function SetConversionData(data){
+  conversionData = data;
+}
+
+function SetFromCurrencySymbol(){
+    fromCurrencySymbol = $('#from-currency-select').val();
+}
+
+function SetToCurrencySymbol(){
+  toCurrencySymbol = $('#to-currency-select').val();
+}
 
 function StartCurrenciesForm(){
   const fromCurrencySelect = $('#from-currency-select');
   const toCurrencySelect = $('#to-currency-select');
 
   $.ajax({
-    url: "/api/ListAllCurrencies",
+    url: "/api/currency/listAll",
     method: "GET",
     dataType: "json",
     success: function(data) {
@@ -32,6 +77,34 @@ function RenderOptions(currencies, selectElement){
     selectElement.append(newOption);
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function CalculateConversion(){
   const fromCurrencySelected = $('#from-currency-select').val();
