@@ -1,3 +1,7 @@
+:root{
+    --common-border-radius: 40px;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -7,10 +11,40 @@ h1 {
     color: #333;
 }
 
+.smooth-box-shadow{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
 #form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
-    display: block;
     padding: 20px;
+    width: 80%;
+    margin: auto;
+    border: solid 1px #c8c8c8;
+    border-radius: var(--common-border-radius);
+}
+
+#form-container input{
+    max-width: 200px;
+}
+
+.input-label {
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+#invert-form{
+    margin: 20px auto;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #dddddd;
 }
 
 .overlay{
@@ -24,5 +58,11 @@ h1 {
     align-items: center;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.15);
+    border-radius: var(--common-border-radius);
 }
 
+.currency-icon{
+    width: auto;
+    height: 50px;
+    margin-left: 15px !important;
+}

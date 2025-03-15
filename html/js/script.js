@@ -1,3 +1,4 @@
+var currenciesList = null;
 var conversionData = null;
 var fromCurrencySymbol = null;
 var toCurrencySymbol = null;
@@ -7,11 +8,13 @@ $(document).ready(function(){
     SetFromCurrencySymbol();
     SetToCurrencySymbol();
     GetRates();
+    UpdateCurrencyIcon(fromCurrencySymbol, true);
   });
 
   $('#to-currency-select').change(function(){
     SetToCurrencySymbol();
     SetToCurrencyInputValue(CalculateConversion());
+    UpdateCurrencyIcon(toCurrencySymbol, false);
   });
 
   $('#from-currency-input').on('input', function () {
@@ -19,6 +22,10 @@ $(document).ready(function(){
     FormatCurrencyInputWithValue($('#to-currency-input').get(0), CalculateConversion());
   });
 });
+
+function SetCurrenciesList(data){
+  currenciesList = data;
+}
 
 function SetConversionData(data){
   conversionData = data;
@@ -41,9 +48,19 @@ function SetToCurrencyInputValue(value){
   $('#to-currency-input').val(''); 
 }
 
+function ShowOverlay(element){
+  element.style.display = 'flex';
+}
+
+function HideOverlay(element){
+  element.style.display = 'none';
+}
+
 function StartCurrenciesForm(){
   const fromCurrencySelect = $('#from-currency-select');
+  const fromCurrencySelectParent = $(fromCurrencySelect).parent();
   const toCurrencySelect = $('#to-currency-select');
+  const toCurrencySelectParent = $(toCurrencySelect).parent();
 
   $.ajax({
     url: "/api/currency/listAll",
@@ -53,10 +70,20 @@ function StartCurrenciesForm(){
       ShowOverlay($('#form-overlay').get(0));
     },
     success: function(data) {
-      RenderOptions(data, fromCurrencySelect);
-      RenderOptions(data, toCurrencySelect);
+      SetCurrenciesList(data)
+
+      RenderOptions(currenciesList, fromCurrencySelect);
+      RenderOptions(currenciesList, toCurrencySelect);
+
+      CreateCurrencyIcon(fromCurrencySelectParent, true);
+      CreateCurrencyIcon(toCurrencySelectParent, false);
+      
       SetFromCurrencySymbol();
       SetToCurrencySymbol();
+
+      UpdateCurrencyIcon(fromCurrencySymbol, true);
+      UpdateCurrencyIcon(toCurrencySymbol, false);
+      
       GetRates();
     },
     error: function(error) {
@@ -65,9 +92,21 @@ function StartCurrenciesForm(){
   });
 }
 
+function CreateCurrencyIcon(selectParentElement, isFrom){
+  const currencyIcon = document.createElement('img');
+  currencyIcon.id = isFrom ? 'from-currency-icon' : 'to-currency-icon';
+  currencyIcon.classList.add('currency-icon');
+  selectParentElement.append(currencyIcon);
+}
+
+function UpdateCurrencyIcon(currencySymbol, isFrom){
+  const imgElement = $(isFrom ? '#from-currency-icon' : '#to-currency-icon');
+  $(imgElement).attr('src', `./src/flags/${currencySymbol}.png`);
+}
+
 function RenderOptions(currencies, selectElement){
   Object.entries(currencies).forEach(([currencyCode, currencyData]) => {
-    let newOption = document.createElement('option');
+    const newOption = document.createElement('option');
     newOption.text = `${currencyData.name} (${currencyData.symbol})`;
     newOption.value = `${currencyCode}`;
 
@@ -118,14 +157,6 @@ function InvertForm(){
 
   SetFromCurrencySymbol(currencyToSymbol);
   SetToCurrencySymbol(currencyFromSymbol);
-}
-
-function ShowOverlay(element){
-  element.style.display = 'flex';
-}
-
-function HideOverlay(element){
-  element.style.display = 'none';
 }
 
 function FormatCurrencyInput(input) {
