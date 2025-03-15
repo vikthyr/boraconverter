@@ -49,6 +49,9 @@ function StartCurrenciesForm(){
     url: "/api/currency/listAll",
     method: "GET",
     dataType: "json",
+    beforeSend: function(){
+      ShowOverlay($('#form-overlay').get(0));
+    },
     success: function(data) {
       RenderOptions(data, fromCurrencySelect);
       RenderOptions(data, toCurrencySelect);
@@ -80,9 +83,13 @@ function GetRates(){
   $.ajax({
     url: `/api/currency/rates?base=${fromCurrencySymbol}`,
     method: "GET",
+    beforeSend: function(){
+      ShowOverlay($('#form-overlay').get(0));
+    },
     success: function(data) {
       SetConversionData(data);
       SetToCurrencyInputValue(CalculateConversion());
+      HideOverlay($('#form-overlay').get(0));
     },
     error: function(error) {
       console.error("Currency rate error:", error);
@@ -111,6 +118,14 @@ function InvertForm(){
 
   SetFromCurrencySymbol(currencyToSymbol);
   SetToCurrencySymbol(currencyFromSymbol);
+}
+
+function ShowOverlay(element){
+  element.style.display = 'flex';
+}
+
+function HideOverlay(element){
+  element.style.display = 'none';
 }
 
 function FormatCurrencyInput(input) {
