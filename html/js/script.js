@@ -46,7 +46,7 @@ function StartCurrenciesForm(){
   const toCurrencySelect = $('#to-currency-select');
 
   $.ajax({
-    url: "/api/currency/ListAll",
+    url: "/api/currency/listAll",
     method: "GET",
     dataType: "json",
     success: function(data) {
@@ -78,7 +78,7 @@ function RenderOptions(currencies, selectElement){
 
 function GetRates(){
   $.ajax({
-    url: `/api/currency/Rates?base=${fromCurrencySymbol}`,
+    url: `/api/currency/rates?base=${fromCurrencySymbol}`,
     method: "GET",
     success: function(data) {
       SetConversionData(data);
