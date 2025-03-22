@@ -52,11 +52,11 @@ function SetToCurrencyInputValue(value){
 }
 
 function ShowOverlay(element){
-  element.style.display = 'flex';
+  $(element).removeClass("hide");
 }
 
 function HideOverlay(element){
-  element.style.display = 'none';
+  $(element).addClass("hide");
 }
 
 function StartCurrenciesForm(){
