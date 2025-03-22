@@ -24,6 +24,11 @@ $(document).ready(function(){
     FormatCurrencyInput(this);
     FormatCurrencyInputWithValue($('#to-currency-input').get(0), CalculateConversion());
   });
+
+  $('#to-currency-input').on('input', function () {
+    FormatCurrencyInput(this);
+    FormatCurrencyInputWithValue($('#from-currency-input').get(0), CalculateConversion(true));
+  });
 });
 
 function SetCurrenciesList(data){
@@ -43,12 +48,12 @@ function SetToCurrencySymbol(){
 }
 
 function SetToCurrencyInputValue(value){
-  if(value){
-    $('#to-currency-input').val(value);
+  if(value != 0){
+    FormatCurrencyInputWithValue($('#to-currency-input').get(0), value);
     return;
   }
 
-  $('#to-currency-input').val(''); 
+  FormatCurrencyInputWithValue($('#to-currency-input').get(0), 0);
 }
 
 function ShowOverlay(element){
@@ -100,7 +105,6 @@ function ValidateAndRemoveOptions(data) {
       $(selector).find('option').each(function() {
           if (!data.rates.hasOwnProperty(this.value)) {
               $(this).remove();
-              console.log($(this).val() + " Removed");
           }
       });
   });
@@ -153,16 +157,26 @@ function GetRates(){
   });
 }
 
-function CalculateConversion(){
-  let fromValue = parseFloat($('#from-currency-input').attr('data-raw'));
-  let currencyRate = conversionData.rates[toCurrencySymbol];
-  let result = fromValue * currencyRate;
+function CalculateConversion(inverted = false) {
+  if (!conversionData || !conversionData.rates) return null;
 
-  if(result){
-    return result.toFixed(2);
+  if (inverted) {
+      let toValue = parseFloat($('#to-currency-input').attr('data-raw')) || 0;
+      let currencyRate = conversionData.rates[toCurrencySymbol];
+
+      if (!currencyRate || currencyRate === 0) return null;
+
+      let result = toValue / currencyRate;
+      return result.toFixed(2);
   }
 
-  return null;
+  let fromValue = parseFloat($('#from-currency-input').attr('data-raw')) || 0;
+  let currencyRate = conversionData.rates[toCurrencySymbol];
+
+  if (!currencyRate || currencyRate === 0) return null;
+
+  let result = fromValue * currencyRate;
+  return result.toFixed(2);
 }
 
 function InvertForm(){
