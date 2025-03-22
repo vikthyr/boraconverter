@@ -4,6 +4,9 @@ var fromCurrencySymbol = null;
 var toCurrencySymbol = null;
 
 $(document).ready(function(){
+
+  StartCurrenciesForm();
+
   $('#from-currency-select').change(function(){
     SetFromCurrencySymbol();
     SetToCurrencySymbol();
@@ -92,6 +95,17 @@ function StartCurrenciesForm(){
   });
 }
 
+function ValidateAndRemoveOptions(data) {
+  ['#from-currency-select', '#to-currency-select'].forEach(selector => {
+      $(selector).find('option').each(function() {
+          if (!data.rates.hasOwnProperty(this.value)) {
+              $(this).remove();
+              console.log($(this).val() + " Removed");
+          }
+      });
+  });
+}
+
 function CreateCurrencyIcon(selectParentElement, isFrom){
   const currencyIcon = document.createElement('img');
   currencyIcon.id = isFrom ? 'from-currency-icon' : 'to-currency-icon';
@@ -119,16 +133,19 @@ function RenderOptions(currencies, selectElement){
 }
 
 function GetRates(){
+  let loadingOverlay = $('#form-overlay').get(0);
+
   $.ajax({
     url: `/api/currency/rates?base=${fromCurrencySymbol}`,
     method: "GET",
     beforeSend: function(){
-      ShowOverlay($('#form-overlay').get(0));
+      ShowOverlay(loadingOverlay);
     },
     success: function(data) {
+      ValidateAndRemoveOptions(data);
       SetConversionData(data);
       SetToCurrencyInputValue(CalculateConversion());
-      HideOverlay($('#form-overlay').get(0));
+      HideOverlay(loadingOverlay);
     },
     error: function(error) {
       console.error("Currency rate error:", error);
