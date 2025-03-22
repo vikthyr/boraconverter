@@ -2,10 +2,13 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">        
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/converter.css">
+        <link rel="stylesheet" href="css/responsive.css">
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
@@ -14,26 +17,59 @@
     <body>
         <h1>Bora Converter</h1>
 
-        <div id="form-container" class="smooth-box-shadow">
-            <div id="form-overlay" class="overlay">
-                <div class="spinner-border" role="status"></div>
-            </div>
+        <section>
+            <div id="form-container" class="smooth-box-shadow">
+                <div id="form-overlay" class="overlay">
+                    <div class="spinner-border" role="status"></div>
+                </div>
 
-            <label class="input-label" for="from-currency-input">Amount</label>
-            <div id="from-currency-container" class="input-group">
-                <input type="text" id="from-currency-input" class="input-group-text" placeholder="0,00" data-raw=""></input>
-                <select id="from-currency-select" class="form-select"></select>
-            </div>
-            
-            <div>
-                <button type="button" id="invert-form" class="btn btn-light" onclick="InvertForm()"><i class="bi bi-arrow-down-up"></i></button>
-            </div>
+                <label class="input-label" for="from-currency-input">Amount</label>
+                <div id="from-currency-container" class="input-group">
+                    <input type="text" id="from-currency-input" class="input-group-text" placeholder="0,00" data-raw=""></input>
+                    <select id="from-currency-select" class="form-select"></select>
+                </div>
+                
+                <div>
+                    <button type="button" id="invert-form" class="btn btn-light" onclick="InvertForm()"><i class="bi bi-arrow-down-up"></i></button>
+                </div>
 
-            <label class="input-label" for="to-currency-input">Converted To</label>
-            <div id="to-currency-container" class="input-group">
-                <input type="text" id="to-currency-input" class="input-group-text" placeholder="0,00" data-raw=""></input>
-                <select id="to-currency-select" class="form-select"></select>
+                <label class="input-label" for="to-currency-input">Converted To</label>
+                <div id="to-currency-container" class="input-group">
+                    <input type="text" id="to-currency-input" class="input-group-text" placeholder="0,00" data-raw=""></input>
+                    <select id="to-currency-select" class="form-select"></select>
+                </div>
             </div>
-        </div>
+        </section>
+
+       <!-- <section>
+            <h1>Conversão de Moedas Online</h1>
+            <p>Saiba como funciona a conversão de moeda, entenda as taxas de câmbio e veja dicas para economizar ao trocar dinheiro.</p>
+
+            <h2>O que é Conversão de Moeda?</h2>
+            <p>A conversão de moeda é o processo de transformar um valor de uma moeda para outra com base na taxa de câmbio atual. Isso é essencial para compras internacionais, viagens e investimentos.</p>
+
+            <h2>Como as Taxas de Câmbio São Definidas?</h2>
+            <p>As taxas de câmbio variam diariamente e são influenciadas por diversos fatores, como:</p>
+            <ul>
+                <li>Oferta e demanda no mercado financeiro.</li>
+                <li>Decisões econômicas de bancos centrais.</li>
+                <li>Inflação e políticas monetárias dos países.</li>
+                <li>Eventos políticos e econômicos globais.</li>
+            </ul>
+
+            <h2>Conversor de Moeda Online: Praticidade e Agilidade</h2>
+            <p>Com ferramentas online, você pode converter moedas em tempo real e obter o melhor valor antes de realizar transações internacionais.</p>
+
+            <h2>Dicas para Economizar na Conversão de Moedas</h2>
+            <ul>
+                <li>Compare taxas de câmbio antes de converter.</li>
+                <li>Evite trocar dinheiro em aeroportos, pois as taxas são mais altas.</li>
+                <li>Prefira pagamentos em moeda local ao usar cartão no exterior.</li>
+                <li>Use um conversor online atualizado para saber o melhor momento para trocar.</li>
+            </ul>
+
+            <h2>Comece Agora Sua Conversão de Moeda!</h2>
+            <p>Use nosso conversor de moedas para calcular valores com as taxas mais atualizadas e planeje suas compras ou viagens internacionais com segurança.</p>
+        </section> -->
     </body>
 </html>

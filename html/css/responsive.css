@@ -1,0 +1,31 @@
+@media (max-width: 768px) {
+    #form-container {
+        width: 100%;
+    }
+
+    .input-group {
+        display: block;
+    }
+
+    #form-container input {
+        max-width: none;
+        width: 85%;
+    }
+
+    .input-group select {
+        margin-top: 10px;
+        width: 100% !important;
+    }
+
+    .input-label{
+        font-size: 16px;
+    }
+
+    .currency-icon {
+        position: absolute;
+        top: -3px;
+        right: 0;
+        height: 50%;
+        padding: 3px;
+    }
+}
