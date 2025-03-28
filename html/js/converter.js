@@ -114,6 +114,7 @@ function CreateCurrencyIcon(selectParentElement, isFrom){
   const currencyIcon = document.createElement('img');
   currencyIcon.id = isFrom ? 'from-currency-icon' : 'to-currency-icon';
   currencyIcon.classList.add('currency-icon');
+  currencyIcon.classList.add('simple-border');
   selectParentElement.append(currencyIcon);
 }
 
