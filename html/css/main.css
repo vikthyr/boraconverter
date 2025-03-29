@@ -10,16 +10,8 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Roboto, sans-serif;
     background-color: var(--background-color);
-}
-
-header{
-    padding: 0 20px;
-}
-
-section {
-    padding: 30px 20px;
 }
 
 h1 {
@@ -28,6 +20,46 @@ h1 {
 
 p {
     color: var(--text-color-dark);
+}
+
+hr {
+    color: var(--title-color);
+    opacity: 0.5;
+}
+
+header {
+    display: flex;
+    justify-content: start;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}
+
+#logo {
+    width: 200px;
+    height: auto;
+}
+
+.pd-h-20 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.pd-h-40 {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.pd-v-20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.pd-v-30 {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .smooth-box-shadow {
