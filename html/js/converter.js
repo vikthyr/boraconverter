@@ -3,6 +3,42 @@ var conversionData = null;
 var fromCurrencySymbol = null;
 var toCurrencySymbol = null;
 
+const translations = {
+  "Euro": "Euro",
+  "US Dollar": "Dólar Americano",
+  "Japanese Yen": "Iene Japonês",
+  "Bulgarian Lev": "Lev Búlgaro",
+  "Czech Koruna": "Coroa Checa",
+  "Danish Krone": "Coroa Dinamarquesa",
+  "British Pound": "Libra Esterlina",
+  "Hungarian Forint": "Florim Húngaro",
+  "Polish Zloty": "Złoty Polonês",
+  "Romanian Leu": "Leu Romeno",
+  "Swedish Krona": "Coroa Sueca",
+  "Swiss Franc": "Franco Suíço",
+  "Icelandic Króna": "Coroa Islandesa",
+  "Norwegian Krone": "Coroa Norueguesa",
+  "Croatian Kuna": "Kuna Croata",
+  "Russian Ruble": "Rublo Russo",
+  "Turkish Lira": "Lira Turca",
+  "Australian Dollar": "Dólar Australiano",
+  "Brazilian Real": "Real Brasileiro",
+  "Canadian Dollar": "Dólar Canadense",
+  "Chinese Yuan": "Yuan Chinês",
+  "Hong Kong Dollar": "Dólar de Hong Kong",
+  "Indonesian Rupiah": "Rupia Indonésia",
+  "Israeli New Shekel": "Novo Shekel Israelense",
+  "Indian Rupee": "Rúpia Indiana",
+  "South Korean Won": "Won Sul-Coreano",
+  "Mexican Peso": "Peso Mexicano",
+  "Malaysian Ringgit": "Ringgit Malaio",
+  "New Zealand Dollar": "Dólar Neozelandês",
+  "Philippine Peso": "Peso Filipino",
+  "Singapore Dollar": "Dólar de Singapura",
+  "Thai Baht": "Baht Tailandês",
+  "South African Rand": "Rand Sul-Africano"
+};
+
 $(document).ready(function(){
 
   StartCurrenciesForm();
@@ -126,7 +162,8 @@ function UpdateCurrencyIcon(currencySymbol, isFrom){
 function RenderOptions(currencies, selectElement){
   Object.entries(currencies).forEach(([currencyCode, currencyData]) => {
     const newOption = document.createElement('option');
-    newOption.text = `${currencyData.name} (${currencyData.symbol})`;
+    const translatedCurrencyName = translations[currencyData.name] || currencyData.name;
+    newOption.text = `${translatedCurrencyName} (${currencyData.symbol})`;
     newOption.value = `${currencyCode}`;
 
     if(currencyCode === 'BRL' && $(selectElement).attr('id') == 'from-currency-select'){
