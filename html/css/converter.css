@@ -39,6 +39,15 @@
     border: 1px solid var(--primary-color);
 }
 
+#conversion-details-container {
+    color: var(--title-color);
+    margin-top: 20px;
+}
+
+#conversion-details-container p {
+    margin: 0;
+}
+
 .overlay {
     display: flex;
     position: absolute;
