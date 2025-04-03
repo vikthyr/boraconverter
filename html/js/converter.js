@@ -54,6 +54,7 @@ $(document).ready(function(){
     SetToCurrencySymbol();
     SetToCurrencyInputValue(CalculateConversion());
     UpdateCurrencyIcon(toCurrencySymbol, false);
+    UpdateConversionDetails();
   });
 
   $('#from-currency-input').on('input', function () {
@@ -163,7 +164,7 @@ function RenderOptions(currencies, selectElement){
   Object.entries(currencies).forEach(([currencyCode, currencyData]) => {
     const newOption = document.createElement('option');
     const translatedCurrencyName = translations[currencyData.name] || currencyData.name;
-    newOption.text = `${translatedCurrencyName} (${currencyData.symbol})`;
+    newOption.text = `${translatedCurrencyName} (${currencyCode})`;
     newOption.value = `${currencyCode}`;
 
     if(currencyCode === 'BRL' && $(selectElement).attr('id') == 'from-currency-select'){
@@ -188,11 +189,25 @@ function GetRates(){
       SetConversionData(data);
       SetToCurrencyInputValue(CalculateConversion());
       HideOverlay(loadingOverlay);
+      UpdateConversionDetails();
     },
     error: function(error) {
       console.error("Currency rate error:", error);
     }
   });
+}
+
+function UpdateConversionDetails(){
+  const [year, month, day] = conversionData.date.split('-');
+  const formattedDate = `${day}/${month}/${year}`;
+
+  const exchangeRate = parseFloat(conversionData.rates[toCurrencySymbol])
+    .toFixed(6)
+    .replace(/(\.\d*?[1-9])0+$/, '$1')
+    .replace(/\.0+$/, '');
+
+  $("#conversion-details-date").text(`Data da cotação: ${formattedDate}`);
+  $("#conversion-details-result").text(`1 ${fromCurrencySymbol} = ${exchangeRate} ${toCurrencySymbol}`);
 }
 
 function CalculateConversion(inverted = false) {
