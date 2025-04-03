@@ -23,11 +23,11 @@ body {
     background-color: var(--background-color);
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
     color: var(--title-color);
 }
 
-p {
+li, p {
     color: var(--text-color);
 }
 
@@ -45,6 +45,10 @@ header {
 footer {
     display: flex;
     justify-content: center;
+}
+
+footer p {
+    margin: 0;
 }
 
 select {
