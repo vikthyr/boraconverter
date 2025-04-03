@@ -1,8 +1,4 @@
 @media (max-width: 889px) {
-    header {
-        justify-content: center;
-    }
-
     #form-container {
         width: 100%;
     }

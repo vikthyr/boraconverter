@@ -1,12 +1,21 @@
 :root{
     --primary-color: #004D73;
-    --primary-color-light: #40aadf;
     --background-color: #F4F4F4;
     --title-color: #004D73;
     --input-background-color: #E0E0E0;
-    --text-color-dark: #333;
+    --text-color: #333;
     --border-color: #B0B0B0;
+    --logo-brightness: 1;
     --common-border-radius: 40px;
+}
+
+.dark-mode {
+    --background-color: #121212;
+    --title-color: #00A0E0;
+    --input-background-color: #1E1E1E;
+    --text-color: #E0E0E0;
+    --border-color: #333;
+    --logo-brightness: 2;
 }
 
 body {
@@ -19,7 +28,7 @@ h1 {
 }
 
 p {
-    color: var(--text-color-dark);
+    color: var(--text-color);
 }
 
 hr {
@@ -29,7 +38,8 @@ hr {
 
 header {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
+    align-items: center;
 }
 
 footer {
@@ -37,9 +47,26 @@ footer {
     justify-content: center;
 }
 
+select {
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+input {
+    color: var(--text-color) !important;
+}
+
 #logo {
+    filter: brightness(var(--logo-brightness));
     width: 200px;
     height: auto;
+}
+
+#toggle-dark-mode {
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: var(--text-color);
 }
 
 .pd-h-20 {
