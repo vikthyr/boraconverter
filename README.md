@@ -29,7 +29,7 @@ O Bora Converter é uma plataforma online que permite a conversão de moedas em 
 <p>Docker Compose instalado</p>
 
 <h4>🚀 Rodando o Projeto</h4>
-<p>git clone https://github.com/seu-usuario/boraconverter.git</p>
+<p>git clone https://github.com/vikthyr/boraconverter.git</p>
 <p>cd boraconverter</p>
 <p></p>docker-compose up</p>
 
